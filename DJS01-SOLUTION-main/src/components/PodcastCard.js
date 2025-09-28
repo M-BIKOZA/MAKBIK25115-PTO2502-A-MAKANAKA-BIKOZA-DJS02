@@ -72,4 +72,11 @@ class PodcastCard extends HTMLElement {
         };
     }
     /**
+     * Sets the podcast data and updates the card UI.
+     * @param {Object} podcast - Podcast data object.
+     */
+    setPodcast(podcast) {
+        this.podcast = podcast;
+        this.renderPodcast();
     }
+    
