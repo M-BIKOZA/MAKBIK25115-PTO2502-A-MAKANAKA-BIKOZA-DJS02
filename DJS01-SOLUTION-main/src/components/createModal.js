@@ -1,6 +1,7 @@
 import { GenreService } from "../utils/GenreService.js";
 import { DateUtils } from "../utils/DateUtils.js";
 import { seasons } from "../data.js";
+import { createPodcastCard } from "./PodcastCard.js";
 
 /**
  * Modal Controller - Controls the podcast details modal.
