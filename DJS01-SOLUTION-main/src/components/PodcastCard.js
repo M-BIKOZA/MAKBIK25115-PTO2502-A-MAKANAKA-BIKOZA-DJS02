@@ -79,4 +79,17 @@ class PodcastCard extends HTMLElement {
         this.podcast = podcast;
         this.renderPodcast();
     }
-    
+    /**
+     * Updates the card UI with the podcast data.
+     */
+    renderPodcast() {
+        if (!this.podcast) return;
+
+        const { img, title, lastUpdated, genres, seasons } = this.podcast;
+        const genreService = GenreService.getNames(genres);
+
+        this.elements.img.src = img;
+        this.elements.img.alt = `Cover art for ${title}`;
+        this.elements.title.textContent = title;
+        this.elements.updatedText.textContent = `Last updated: ${DateUtils.formatDate(lastUpdated)}`;
+        this.elements.seasons.textContent = seasons > 1 ? `${seasons} Seasons` : `${seasons} Season`;
