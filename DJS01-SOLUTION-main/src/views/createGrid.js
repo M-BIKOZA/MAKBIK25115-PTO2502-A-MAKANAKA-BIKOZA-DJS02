@@ -1,4 +1,4 @@
-import { createPodcastCard } from "../components/createPodcastCard.js";
+import { PodcastCard } from "../components/PodcastCard.js";
 import { createModal } from "../components/createModal.js";
 
 /**
