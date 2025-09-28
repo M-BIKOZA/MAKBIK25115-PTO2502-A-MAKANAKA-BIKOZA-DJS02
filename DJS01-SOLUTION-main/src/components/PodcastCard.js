@@ -92,4 +92,24 @@ class PodcastCard extends HTMLElement {
         this.elements.img.alt = `Cover art for ${title}`;
         this.elements.title.textContent = title;
         this.elements.updatedText.textContent = `Last updated: ${DateUtils.formatDate(lastUpdated)}`;
-        this.elements.seasons.textContent = seasons > 1 ? `${seasons} Seasons` : `${seasons} Season`;
+        this.elements.seasons.textContent = `${seasons} season${seasons > 1 ? 's' : ''
+}`;
+        this.elements.tags.innerHTML = genreNames
+        .map((g) => `<span class="tag">${g}</span>`)
+        .join("");
+        this.elements.updated.textContent = DateUtils.formatDate(lastUpdated);
+
+        this.elements.card.onclick = () => {
+                console.log(`Card clicked: ${title}`);
+                this.dispatchEvent(new CustomEvent("podcastSelected", {
+                    detail: this.podcast,
+                    bubbles: true,
+                    composed: true,
+                }));
+        }
+
+    };
+}
+
+// Define the custom element
+customElements.define("podcast-card", PodcastCard);
