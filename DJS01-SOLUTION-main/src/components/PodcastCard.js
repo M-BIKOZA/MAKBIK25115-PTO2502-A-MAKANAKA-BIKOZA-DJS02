@@ -17,3 +17,8 @@ template.innerHTML = /*html*/ `
         .card:hover {
         transform: scale(1.02);
 }
+        .card img {
+        width: 100%;
+        border-radius: 6px;
+}
+        
