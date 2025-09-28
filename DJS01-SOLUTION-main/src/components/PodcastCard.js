@@ -53,3 +53,23 @@ template.innerHTML = /*html*/ `
         <p class="seasons"></p>
     </div>
 `;
+
+// PodcastCard Web Component
+class PodcastCard extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        shadow.appendChild(template.content.cloneNode(true));
+
+        /**type {Object.<string, HTMLElement>} */
+        this.elements = {
+            card: shadow.querySelector(".card"),
+            img: shadow.querySelector("img"),
+            title: shadow.querySelector("h3"),
+            updatedText: shadow.querySelector(".updated-text"),
+            tags: shadow.querySelector(".tags"),
+            seasons: shadow.querySelector(".seasons"),
+        };
+    }
+    /**
+    }
