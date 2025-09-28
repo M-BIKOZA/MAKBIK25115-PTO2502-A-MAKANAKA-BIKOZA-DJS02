@@ -21,4 +21,11 @@ template.innerHTML = /*html*/ `
         width: 100%;
         border-radius: 6px;
 }
-        
+       . card h3 {
+        margin: 0.5rem 0;
+}
+        .card p {
+        margin: 0;
+        font-size: 0.8rem; 
+        color: var (--grey-text)
+}
