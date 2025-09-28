@@ -29,3 +29,14 @@ template.innerHTML = /*html*/ `
         font-size: 0.8rem; 
         color: var (--grey-text)
 }
+        .tags {
+        margin-top: 0.5rem;
+}
+        .tag {
+        font-size: 0.7rem;
+        background: var(--light-grey);
+        margin-right: 0.3rem;
+        margin-top: 0.3rem;
+        border-radius: 4px;
+        display: inline-block;
+}
