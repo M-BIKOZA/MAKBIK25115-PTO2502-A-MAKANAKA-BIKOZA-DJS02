@@ -40,3 +40,16 @@ template.innerHTML = /*html*/ `
         border-radius: 4px;
         display: inline-block;
 }
+        .updated-text{
+        font-size: 0.75rem;
+        color: var(--grey-text);
+}
+        </style>
+    <div class="card">
+        <img />
+        <h3></h3>
+        <p class="updated-text"></p>
+        <div class="tags"></div>
+        <p class="seasons"></p>
+    </div>
+`;
