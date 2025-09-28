@@ -1,64 +1,63 @@
-# DJS02 – Web Component: Podcast Preview
+# Web Component: Podcast Preview
 
-## Overview
+## 📘 Overview
 
-In this project, you will build a reusable and encapsulated **custom HTML element** that displays a podcast preview. The component must follow the **Web Component standard**, using `customElements.define()` and should work independently from the main application logic. This component will enhance modularity, promote reuse, and reduce code duplication across the app.
+This project implements a custom HTML element called <podcast-preview> that displays a reusable and encapsulated podcast preview UI. Built using the Web Components standard, this component ensures separation of concerns, encapsulation, and reusability across the application.
 
-The component should be designed to **accept podcast data via attributes or properties**, display relevant UI elements (such as title, cover image, and genres), and **communicate with the main application** through custom events.
+It accepts podcast data via HTML attributes or JavaScript properties, renders a consistent preview layout, and communicates with the parent application via custom events, without being tightly coupled to its logic.
 
----
+# What i did
 
-## Core Objectives
+- Forked the repository from git
+- Cloned the repository to my visual studio.
+- Opened the index.html file in my browser to view the Kanban board.
+- Customized task cards, colors, or layouts by editing the CSS and HTML files.
 
-### Web Component Functionality
+## 🎯 Core Objectives
 
-- Create a **custom HTML element** using `customElements.define()`.
-- Accept data (cover image, title, genres, number of seasons, and last updated date) **as attributes or properties**.
-- Keep the component **stateless** and reliant on external data provided by the parent.
-- Use **Shadow DOM** for style and logic encapsulation to avoid global conflicts.
-- Trigger a **custom event** when a user interacts with the component (e.g., clicking), so that the parent application can open a modal or take other actions without tightly coupling to the component’s logic.
+✅ Web Component Functionality
 
----
+- Define a custom element using customElements.define().
+- Accept data via attributes or properties:
+- Cover image
+- Title
+- Genre(s)
+- Number of seasons
+- Last updated date
+- Remain stateless, relying solely on external data.
+- Use Shadow DOM to encapsulate styling and logic.
+- Emit custom events (e.g., podcast-clicked) on user interaction.
 
-## UI/UX Requirements
+## 🖼️ UI/UX Requirements
 
-- The component should render a clean and **visually consistent preview** of each podcast.
-- Display:
-  - Podcast **cover image**
-  - Podcast **title**
-  - **Genre names**
-  - **Number of seasons**
-  - **Last updated** in a human-readable format
-- The component must be **responsive**, and match the overall app design on desktop and mobile.
-- On click, the component must notify the parent app to **open a modal** or navigate to details.
+The component displays:
 
----
+- 🎧 Podcast cover image
+- 📝 Podcast title
+- 🏷️ Genres
+- 🎞️ Number of seasons
+- 📅 Last updated date (in a human-readable format)
 
-## Code Quality & Maintainability
+Additional UI Requirements:
 
-- Write clear, consistent, and modular code.
-- Follow **functional and object-oriented programming** patterns.
-- Document major functions using **JSDoc comments** (parameters, return types, etc.).
-- Use consistent **code formatting** across HTML, CSS, and JavaScript.
+- Fully responsive design (mobile & desktop)
+- Consistent visual style matching app theme
+- On click, trigger event to notify parent to open a modal or navigate to a detail view
 
----
+## 🧼 Code Quality & Maintainability
 
-## Technical Constraints
+- Modular, readable code using ES6+ features
+- Adheres to object-oriented and functional programming principles
+- Well-documented with JSDoc comments
+- Consistent formatting for HTML, CSS, and JS
 
-- Do **not** use any third-party frameworks for creating the web component.
-- Use **native JavaScript (ES6+)**, HTML, and CSS.
-- No page reloads or navigation.
-- Ensure compatibility with modern browsers.
+## 🔒 Technical Constraints
 
----
+- ❌ No third-party frameworks (React, Vue, etc.)
+- ✅ Only native HTML, CSS, and JavaScript
+- 🔄 No full page reloads or navigation
+- 🧭 Fully compatible with modern browsers
 
-## Deliverables
+📦 Deliverables
 
-- A working custom Web Component file (e.g., `PodcastPreview.js`).
-- An HTML demo page showcasing the component usage.
-- A `README.md` file with:
-  - How to use and register the component
-  - Instructions for passing data
-  - How to listen for interaction events
-
----
+PodcastPreview.js – Web Component definition
