@@ -1,7 +1,6 @@
 import { podcasts } from "./data.js";
 import { createModal } from "./components/createModal.js";
 import { createGrid } from "./views/createGrid.js";
-import { createModal } from "./components/PodcastCard.js";
 
 /**
  * Initializes the podcast application.
@@ -15,5 +14,6 @@ function init() {
   const grid = createGrid();
   grid.render(podcasts);
 }
+
 
 init();

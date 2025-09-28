@@ -1,115 +1,131 @@
-import { GenreService } from "../utils/GenreService";   
-import { DateUtils } from "../utils/DateUtils";
+import { GenreService } from "../utils/GenreService.js";
+import { DateUtils } from "../utils/DateUtils.js";
 
-// Create the template for a podcast card
+/**
+ * Template containing the markup and styles for the podcast card.
+ */
 const template = document.createElement("template");
-template.innerHTML = /*html*/ `
-    <style>
-        .card {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: transform 0.2s; 
-}
+template.innerHTML = /* html */ `
+  <style>
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
 
-        .card:hover {
-        transform: scale(1.02);
-}
-        .card img {
-        width: 100%;
-        border-radius: 6px;
-}
-       . card h3 {
-        margin: 0.5rem 0;
-}
-        .card p {
-        margin: 0;
-        font-size: 0.8rem; 
-        color: var (--grey-text)
-}
-        .tags {
-        margin-top: 0.5rem;
-}
-        .tag {
-        font-size: 0.7rem;
-        background: var(--light-grey);
-        margin-right: 0.3rem;
-        margin-top: 0.3rem;
-        border-radius: 4px;
-        display: inline-block;
-}
-        .updated-text{
-        font-size: 0.75rem;
-        color: var(--grey-text);
-}
-        </style>
-    <div class="card">
-        <img />
-        <h3></h3>
-        <p class="updated-text"></p>
-        <div class="tags"></div>
-        <p class="seasons"></p>
-    </div>
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .card p {
+      margin: 0px;
+      font-size: 0.8rem;
+      color: var(--grey-text);
+    }
+
+    .tags {
+      margin: 0.5rem 0;
+    }
+
+    .tag {
+      background: #eee;
+      padding: 0.3rem 0.6rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 0.8rem;
+    }
+
+    .updated-text {
+      font-size: 0.8rem;
+      color: var(--grey-text);
+    }
+  </style>
+  <div class="card">
+    <img />
+    <h3></h3>
+    <p class="seasons"></p>
+    <div class="tags"></div>
+    <p class="updated-text"></p>
+  </div>
 `;
 
-// PodcastCard Web Component
+/**
+ * Custom Web Component to render a podcast card preview.
+ *
+ */
 class PodcastCard extends HTMLElement {
-    constructor() {
-        super();
-        const shadow = this.attachShadow({ mode: "open" });
-        shadow.appendChild(template.content.cloneNode(true));
+  constructor() {
+    super();
+    const shadow = this.attachShadow({ mode: "open" });
+    shadow.appendChild(template.content.cloneNode(true));
 
-        /**type {Object.<string, HTMLElement>} */
-        this.elements = {
-            card: shadow.querySelector(".card"),
-            img: shadow.querySelector("img"),
-            title: shadow.querySelector("h3"),
-            updatedText: shadow.querySelector(".updated-text"),
-            tags: shadow.querySelector(".tags"),
-            seasons: shadow.querySelector(".seasons"),
-        };
-    }
-    /**
-     * Sets the podcast data and updates the card UI.
-     * @param {Object} podcast - Podcast data object.
-     */
-    setPodcast(podcast) {
-        this.podcast = podcast;
-        this.renderPodcast();
-    }
-    /**
-     * Updates the card UI with the podcast data.
-     */
-    renderPodcast() {
-        if (!this.podcast) return;
-
-        const { img, title, lastUpdated, genres, seasons } = this.podcast;
-        const genreService = GenreService.getNames(genres);
-
-        this.elements.img.src = img;
-        this.elements.img.alt = `Cover art for ${title}`;
-        this.elements.title.textContent = title;
-        this.elements.updatedText.textContent = `Last updated: ${DateUtils.formatDate(lastUpdated)}`;
-        this.elements.seasons.textContent = `${seasons} season${seasons > 1 ? 's' : ''
-}`;
-        this.elements.tags.innerHTML = genreNames
-        .map((g) => `<span class="tag">${g}</span>`)
-        .join("");
-        this.elements.updated.textContent = DateUtils.formatDate(lastUpdated);
-
-        this.elements.card.onclick = () => {
-                console.log(`Card clicked: ${title}`);
-                this.dispatchEvent(new CustomEvent("podcastSelected", {
-                    detail: this.podcast,
-                    bubbles: true,
-                    composed: true,
-                }));
-        }
-
+    /** @type {Object.<string, HTMLElement>} */
+    this.elements = {
+      card: shadow.querySelector(".card"),
+      img: shadow.querySelector("img"),
+      title: shadow.querySelector("h3"),
+      seasons: shadow.querySelector(".seasons"),
+      tags: shadow.querySelector(".tags"),
+      updated: shadow.querySelector(".updated-text"),
     };
+  }
+
+  /**
+   * Stores the podcast data and triggers UI rendering.
+   * @param {Object} podcast - The podcast data object.
+   */
+  setPodcast(podcast) {
+    this._podcast = podcast;
+    this.renderPodcast();
+  }
+
+  /**
+   * Updates the UI with the stored podcast data.
+   *
+   */
+  renderPodcast() {
+    if (!this._podcast) return;
+
+    const { image, title, seasons, genres, updated } = this._podcast;
+    const genreNames = GenreService.getNames(genres);
+
+    this.elements.img.src = image;
+    this.elements.img.alt = `${title} cover`;
+    this.elements.title.textContent = title;
+    this.elements.seasons.textContent = `${seasons} season${
+      seasons > 1 ? "s" : ""
+    }`;
+    this.elements.tags.innerHTML = genreNames
+      .map((g) => `<span class="tag">${g}</span>`)
+      .join("");
+    this.elements.updated.textContent = DateUtils.format(updated);
+
+    this.elements.card.onclick = () => {
+      console.log("podcast clicked");
+      this.dispatchEvent(
+        new CustomEvent("podcast-selected", {
+          detail: this._podcast,
+          bubbles: true,
+          composed: true,
+        })
+      );
+    };
+  }
 }
 
-// Define the custom element
 customElements.define("podcast-card", PodcastCard);
+export { PodcastCard };
