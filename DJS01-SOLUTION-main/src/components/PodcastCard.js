@@ -12,3 +12,8 @@ template.innerHTML = /*html*/ `
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
         transition: transform 0.2s; 
+}
+
+        .card:hover {
+        transform: scale(1.02);
+}
