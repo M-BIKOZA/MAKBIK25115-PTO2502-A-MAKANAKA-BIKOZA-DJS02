@@ -17,7 +17,11 @@ export const createGrid = () => {
     render(podcastList) {
       container.innerHTML = "";
       podcastList.forEach((p) => {
-        const card = createPodcastCard(p, createModal.open);
+        const card = document.createElement("podcast-card");
+        card.setPodcast(p);
+        card.addEventListener("podcastselected", (e) => {
+          createModal().open(e.detail.podcast);
+        });
         container.appendChild(card);
       });
     },
